@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormTest } from 'reactstrap';
+import { Row, Col, Button, Form, FormGroup, Label, Input, FormTest } from 'reactstrap';
 
 class AddIngredient extends Component {
 	constructor(){
@@ -22,7 +22,9 @@ class AddIngredient extends Component {
 		return(
 			<Form 
 			onSubmit={this.props.addIngredient}>
-			<Label>Add Ingredients Manually</Label>
+				<Label>Add Ingredients Manually</Label>
+			<Row>
+			<Col md={3}>
 				<FormGroup>
 				<Label>Amount</Label>
 					<Input 
@@ -32,14 +34,16 @@ class AddIngredient extends Component {
 					value={this.state.ingredient.amount}
 					onChange={this.updateIngredient}/>
 				</FormGroup>
+				</Col>
+				<Col md={4}>
 				<FormGroup>
 					<Label>Measurement</Label>
-					<Input 
-					type="measurement" 
-					name="measurement"
+					<Input type="select" 
+					name="measurement" 
 					value={this.state.ingredient.measurement}
-					onChange={this.updateIngredient}/>
+					onChange={this.updateIngredient}>
 						<option>N/A</option>
+						<option>No measurement</option>
 						<option>cup(s)</option>
 						<option>tsp</option>
 						<option>tbsp</option>
@@ -48,7 +52,11 @@ class AddIngredient extends Component {
 						<option>pint(s)</option>
 						<option>quart(s)</option>
 						<option>dash</option>
+						<option>piece</option>
+						</Input>
 				</FormGroup>
+				</Col>
+				<Col md={4}>
 				<FormGroup>
 					<Label>Ingredient</Label>
 					<Input 
@@ -57,11 +65,15 @@ class AddIngredient extends Component {
 					value={this.state.ingredient.ingredient}
 					onChange={this.updateIngredient}/>
 				</FormGroup>
+				</Col>
+				<Col md={1}>
 				<Button 
-				color="blue" 
+				color="primary" 
 				type="Submit"
 				onClick={() => this.props.addIngredient.bind(null, this.state.ingredient)}>
 				Add</Button>
+				</Col>
+				</Row>
 			</Form>
 			)
 		}

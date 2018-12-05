@@ -33,6 +33,7 @@ class NavLogged extends Component {
 						Past Lists
 					</NavItem>
 					<NavItem onClick={this.handleLogout}>
+					Logout
 					</NavItem>
 				</Nav>
 			</Navbar>

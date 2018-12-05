@@ -5,11 +5,12 @@ class RecipeResults extends Component {
 	constructor() {
 		super();
 		this.state = {
-			results: []
+			results: [],
+			query: this.props.query
 		}
 	}
-getResults = async (query) => {
-	const result = await fetch('/recipe/search' + query, {
+getResults = async () => {
+	const result = await fetch('/recipe/search' + this.query, {
 		method: 'POST',
 		data: '', 
 		headers: {
@@ -35,6 +36,8 @@ componentDidMount(){
 			height: '180px',
 			width: '316px'
 		}
+		console.log(this.props.query, "this.props.query");
+		console.log(this.props "this.props");
 		const recipes = this.state.results.map((recipe, i) => {
 			return(
 				<Card key={i}>

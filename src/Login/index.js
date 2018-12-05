@@ -7,9 +7,11 @@ constructor(){
 
 	this.state={
 		username: '',
-		password: ''
+		password: '',
+		hidden: true,
 	}
 }
+
 handleChange = (e) => {
 	this.setState({
 		[e.currentTarget.name]: e.currentTarget.value
@@ -36,13 +38,25 @@ render(){
 			<Form onSubmit={this.handleSubmit}>
 				<FormGroup>
 					<Label> Username: </Label>
-					<Input type='text' name='username' onChange={this.handleChange} />
+					<Input 
+					type='text' 
+					name='username'
+					placeholder='username' 
+					onChange={this.handleChange} 
+					required/>
 				</FormGroup>
 				<FormGroup>
 					<Label> Password: </Label>
-					<Input type='text' name='password' onChange={this.handleChange} />
+					<Input 
+					type='password' 
+					name='password'
+					placeholder='password'
+					onChange={this.handleChange} 
+					required/>
 				</FormGroup>
-				<Button type='Submit' color='primary'>Login</Button>
+				<Button 
+				type='Submit' 
+				color='primary'>Login</Button>
 			</Form>
 		)
 }

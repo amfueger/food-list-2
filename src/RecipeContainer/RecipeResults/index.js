@@ -6,7 +6,6 @@ class RecipeResults extends Component {
 		super();
 		this.state = {
 			results: [],
-			query: this.props.query
 		}
 	}
 getResults = async () => {
@@ -17,8 +16,7 @@ getResults = async () => {
 			'Content-Type': 'application/json'
 		}
 	});
-	
-	const resultJson = await result.json();
+		const resultJson = await result.json();
 	if(result.status !== 200) {
 		console.log(result, "Error in getting result");
 	}
@@ -36,8 +34,6 @@ componentDidMount(){
 			height: '180px',
 			width: '316px'
 		}
-		console.log(this.props.query, "this.props.query");
-		console.log(this.props "this.props");
 		const recipes = this.state.results.map((recipe, i) => {
 			return(
 				<Card key={i}>

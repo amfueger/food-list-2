@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardTitle, CardBody } from 'reactstrap';
+import { Card, CardColumns, CardImg, CardText, CardTitle, CardBody } from 'reactstrap';
 
 class RecipeResults extends Component {
 	constructor() {
@@ -8,27 +8,6 @@ class RecipeResults extends Component {
 			results: [],
 		}
 	}
-getResults = async () => {
-	const result = await fetch('/recipe/search' + this.query, {
-		method: 'POST',
-		data: '', 
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-		const resultJson = await result.json();
-	if(result.status !== 200) {
-		console.log(result, "Error in getting result");
-	}
-}
-componentDidMount(){
-	this.getResults()
-	.then((queryResult) => {this.setState({
-			results: queryResult})
-	}).catch((err) => {
-		console.log(err, "componentDidMount recipeResults");
-	})
-}
 	render(){
 		const imgStyle = {
 			height: '180px',
@@ -46,7 +25,9 @@ componentDidMount(){
 				)
 		})
 		return(
-				<div>{recipes}</div>
+				<div>
+				<CardColumns>{recipes}</CardColumns>
+				</div>
 			)
 	}
 }

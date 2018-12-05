@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Label, FormGroup, Input } from 'reactstrap';
 
+
 class Login extends Component{
 constructor(){
 	super();
@@ -18,7 +19,8 @@ handleChange = (e) => {
 	})
 }
 handleSubmit = async (e) => {	
-	const loginResponse = await fetch('http://localhost:4000/auth', {
+	e.preventDefault();
+	const loginResponse = await fetch('http://localhost:9000/auth/login', {
 		method: 'POST',
 		credentials: 'include',
 		body: JSON.stringify(this.state),
@@ -27,10 +29,10 @@ handleSubmit = async (e) => {
 		}
 	});
 	const parsedResponse = await loginResponse.json();
-
-	if(parsedResponse.data === 'login successful'){
+	console.log(parsedResponse, "parsedResponse in login");
+	if(parsedResponse.data === 'Login successful!'){
 		console.log('success login');
-		this.props.history.push('/list');
+	this.props.updateComponentShowing("ListContainer")
 	}
 }
 render(){
@@ -64,3 +66,4 @@ render(){
 }
 
 export default Login;
+

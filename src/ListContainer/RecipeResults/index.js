@@ -6,16 +6,17 @@ class RecipeResults extends Component {
 	constructor() {
 		super();
 		this.state = {
+			query: '',
 			randomRecipes: []
 		}
 	}
-getResults = async (query) => {
-	const result = await fetch('/recipe/search?=' + query);
-	const resultJson = await result.json();
-	if(result.status !== 200) {
-		console.log(result, "Error in getting result");
-	}
-}
+// getResults = async (query) => {
+// 	const result = await fetch('/recipe/search?=' + query);
+// 	const resultJson = await result.json();
+// 	if(result.status !== 200) {
+// 		console.log(result, "Error in getting result");
+// 	}
+// }
 componentDidMount(){
 	this.getResults()
 	.then(randomRecipes => this.setState({
@@ -29,6 +30,7 @@ componentDidMount(){
 			height: '180px',
 			width: '316px'
 		}
+		console.log(this.state.results, "this.state.results in ListContainer");
 		const recipes = this.state.results.map((recipe, i) => {
 			return(
 				<Card key={i}>

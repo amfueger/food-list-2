@@ -11,47 +11,9 @@ import moment from 'moment';
 class RecipeContainer extends Component {
 	constructor() {
 		super()
-
 		this.state = {
-			trips: [],
-			query: '',
-			randomRecipes: [],
-			recipeToEdit: {
-				amount: ''
-			},
-			ingredientToEdit: {
-				ingredient: '',
-				quantity: '',
-				measure: ''
-			}, 
-			showRecipeModal: false,
-			showIngredientModal: false,
-			currentTrip: [{
-				tripName: '',
-				date: Date,
-				recipeList: [{
-					apiRecipeId: null,
-					title: ''
-				}],
-				itemList: [{
-					ingredient: '',
-					quantity: '',
-					measure: ''
-					}]
-				}]
+			recipes: []
 		}
-	}
-	// handleQuery = (query) => {
-	// 	this.setState({ 
-	// 		query: query
-	// 	})
-	// }
-	handle
-	addIngredient = (e) => {
-		e.preventDefault();
-			this.setState({
-				ingredientList: [...this.state.ingredientList, this.props.ingredient]
-			})	
 	}
 	addRecipe = (e) => {
 		e.preventDefault();
@@ -110,6 +72,8 @@ class RecipeContainer extends Component {
 				console.log(e, "e from addTrip in ListContainer");
 			}		
 	}
+	//<RecipeResults query={this.state.query} />
+	//<RecipeSearch handleQuery={this.handleQuery}/>
 	render() {
 		return (
 			<div>
@@ -118,17 +82,14 @@ class RecipeContainer extends Component {
 						<Label>Name of Trip:</Label>
 						<Input name="title" type="title" placeholder={moment().format('LLL')}/>
 					</FormGroup>
-					<FormGroup>
-						<Label>Date:</Label>
-						<Input name="date" type="date" placeholder={moment().format('LLL')}/>
-					</FormGroup>	
+						<small>{moment().format('LLL')}</small>
 					</Form>
 				<TempIngredients />
 				<AddIngredient 
 				addIngredient={this.addIngredient}/>
 				<TempRecipes />
-				<RecipeSearch handleQuery={this.handleQuery}/>
-				<RecipeResults query={this.state.query} />
+				
+				
 			</div>
 			)
 	}

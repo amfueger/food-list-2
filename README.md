@@ -1,44 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Food List
+Food List is an application to help you put together a grocery list based on searched recipes. It then allows you to save and email your list for shopping.
 
-## Available Scripts
+## Parameters of the project
+https://github.com/ga-chicago/wdi-13-capstone
+1. User can create a unique account, including username and email.
+2. User can login using this account.
+3. User can put together their grocery list:
+	* Recipe search available to user via API
+	* Recipe can be added or a removed from a list of user recipes pertaining to the grocery list. Doing so removes the needed ingredient amounts. 
+	* User can add other items to their shopping list as needed.
+	* User can delete items from grocery list as needed.
+	* User can make conversions of amounts of food when two recipes have differing measurements for the same ingredient.
+4. User can complete grocery list, rendering it static and saved by title/date for future reference. 
+5. User receives a pdf or email of the static grocery list
+6. User's selected recipes become part of recipe favorite list AND are attached to the grocery list for past perusal.
 
-In the project directory, you can run:
+Notes: 
+* Recipes are linked externally
+* User's grocery lists are private use; other user's grocery lists are inaccessible entirely by other users. 
 
-### `npm start`
+## Flex Goals
+1. Internal recipe page vs. use of url that links outside
+2. Create your own recipe
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## User Story
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+A user needs to first log in, or register. Registration requires an email, username, password. Once logged in, they are taken to a New Grocery List page. 
+This page contains:
+Grocery list - unfinished, requires user input
+Added Recipes - unfinished, requires user input
+Recipe search (API supported)
+Recipe results from search.
 
-### `npm test`
+User adds however many recipes they desire and their ingredients are added to the grocery list above. This includes removal of duplicates. Units of measure will be checked against one another and user will be asked to convert units where necessary. 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Removal of a recipe will remove the amount of the ingredients added as a result of that recipe.
 
-### `npm run build`
+User completes list by hitting complete button (email or pdf or both is taken care of)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Technology
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Front End: React.js | Bootstrap4
+Back End: Nodejs | express | Sequelize (ORM) (sanitizes and translates data for you)
+Database: Postgresql 
+API: spoonacular 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Other frameworks: 
+Flask - written with python
 
-### `npm run eject`
+## Wireframes
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![login](./imgs/login.png)
+![homepage](./imgs/homepage.png)
+![action](./imgs/action.png)
+![profile](./imgs/profile.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Data Models
+https://docs.google.com/spreadsheets/d/12K1l97x7fLH3XVBiPK5_I6km61obcIp9Kl06xj_TiYU/edit#gid=0

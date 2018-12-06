@@ -7,6 +7,8 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 
+import './apiUrl';
+
 ReactDOM.render(
 	<BrowserRouter>
 		<App />

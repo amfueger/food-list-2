@@ -52,10 +52,23 @@ addRecipe = (e) => {
 	//Not ready
 	addRecipeIngredients = async (e) => {
 		e.preventDefault();
-		const ingredients = await fetch('http://localhost:/list/ingredients' + this.state.apiRecipeId + + '/information');
-		//How do I pass the req.query.apiRecipeId back to the back end
+		const ingredients = await fetch('http://localhost:/list/ingredients' + this.state.apiRecipeId + + '/information');		
 		const parsedResponse = await ingredients.json();
-
+		const currentList = await this.state.itemList;
+		const ingredient = await parsedResponse.data.extendedIngredients;
+		for(let i = 0; 0 < ingredient.length; i++){
+			this.setState({
+				singleIngredient: { 
+					ingredient: ingredient[i].name,
+					quantity: ingredient[i].measures.us.amount,
+					measure: ingredient[i].measures.us.unitShort
+				}
+			})
+			currentList.push(this.state.singleIngredient);
+		}
+		this.setState({
+			itemList: currentList
+		})
 	}
   handleIngredientChange = (e) => {
     this.setState({
@@ -94,6 +107,8 @@ addRecipe = (e) => {
 			itemList: [...this.state.itemList, this.singleIngredient]
 		})
 	}
+
+
 	//Working on
 	deleteIngredient = async (id) => {
 		this.setState({

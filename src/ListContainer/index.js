@@ -52,7 +52,7 @@ addRecipe = (e) => {
 	//Not ready
 	addRecipeIngredients = async (e) => {
 		e.preventDefault();
-		const ingredients = await fetch('http://localhost:/list/ingredients');
+		const ingredients = await fetch('http://localhost:/list/ingredients' + this.state.apiRecipeId + + '/information');
 		//How do I pass the req.query.apiRecipeId back to the back end
 		const parsedResponse = await ingredients.json();
 

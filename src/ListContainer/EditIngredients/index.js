@@ -8,15 +8,15 @@ const EditIngredient = (props) => {
 				<ModalBody>
 					<Form onSubmit={props.closeAndEdit}>
 						<Row>
-							<Col sm="2">
+							<Col sm="1">
 								<Label>Amount</Label>
 								<Input type="text"/>
 							</Col>
-							<Col sm="">
+							<Col sm="5">
 								<Label>Measure</Label>
 								<Input type="select"/>
 							</Col>
-							<Col sm="">
+							<Col sm="5">
 								<Label>Ingredient</Label>
 								<Input type="text"/>
 							</Col>

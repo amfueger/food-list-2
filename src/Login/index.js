@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Label, FormGroup, Input } from 'reactstrap';
+import { Col, Form, Button, Label, FormGroup, Input } from 'reactstrap';
 
 
 class Login extends Component{
@@ -38,6 +38,7 @@ handleSubmit = async (e) => {
 render(){
 	return(
 			<Form onSubmit={this.handleSubmit}>
+			<Col md={6}>
 				<FormGroup>
 					<Label> Username: </Label>
 					<Input 
@@ -47,6 +48,8 @@ render(){
 					onChange={this.handleChange} 
 					required/>
 				</FormGroup>
+				</Col>
+				<Col md={6}>
 				<FormGroup>
 					<Label> Password: </Label>
 					<Input 
@@ -56,6 +59,7 @@ render(){
 					onChange={this.handleChange} 
 					required/>
 				</FormGroup>
+				</Col>
 				<Button 
 				type='Submit' 
 				color='primary'>Login</Button>

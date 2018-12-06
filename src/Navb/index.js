@@ -9,16 +9,16 @@ class Navb extends Component {
 			<Navbar color="light" light expand="md">
 				<Nav className="ml-auto" navbar>
 					<NavItem onClick={() => this.props.updateComponentShowing("List")}>
-				    	Home
+				    	Home 
 					</NavItem>
 					<NavItem onClick={() => this.props.updateComponentShowing("Recipes")}>
-				    	Recipes
+				    	Recipes 
 					</NavItem>
 					<NavItem onClick={() => this.props.updateComponentShowing("Login")}>
-							Login
+							Login 
 					</NavItem>
 					<NavItem onClick={() => this.props.updateComponentShowing("Register")}>
-						Register
+						Register 
 					</NavItem>
 				</Nav>
 			</Navbar>

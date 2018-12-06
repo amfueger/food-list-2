@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Input } from 'reactstrap';
+import { Col, Form, Button, Input } from 'reactstrap';
 // import RecipeSearch from './RecipeSearch';
 //API here
 
@@ -28,8 +28,10 @@ handleSubmit = (e) => {
 	render() {
 		return(
 			<Form onSubmit={this.handleSubmit}>
+			<Col md={3}>
 				<Input type='text' name='query' value={this.state.query} onChange={this.handleInput} placeholder='Look up Recipe'/>
 				<Button color="primary" size='large' type='Submit'>Search</Button>
+				</Col>
 			</Form>
 			)
 	}

@@ -19,11 +19,11 @@ class RecipeContainer extends Component {
 			query: query
 		})
 	}
-//<RandomRecipes /> put in when ready
+
 	render() {
 		return(
 			<div>
-				
+				<RandomRecipes />
 				<RecipeSearch handleQuery={this.handleQuery}/>
 				<RecipeResults query={this.state.query} />
 			</div>

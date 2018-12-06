@@ -4,6 +4,7 @@ import RecipeResults from './RecipeResults';
 import TempIngredients from './TempIngredients';
 import TempRecipes from './TempRecipes';
 import AddIngredient from './AddIngredient';
+import EditIngredients from './EditIngredients';
 
 import { Form, Label, Input, FormGroup } from 'reactstrap';
 import moment from 'moment';
@@ -12,17 +13,49 @@ class RecipeContainer extends Component {
 	constructor() {
 		super()
 		this.state = {
-			recipes: []
+			trips: [],
+			query: '',
+			randomRecipes: [],
+			recipeToEdit: {
+				amount: ''
+			},
+			ingredientToEdit: {
+				ingredient: '',
+				quantity: '',
+				measure: ''
+			}, 
+			showRecipeModal: false,
+			showIngredientModal: false,
+			currentTrip: [{
+				tripName: '',
+				date: Date,
+				recipeList: [{
+					apiRecipeId: null,
+					title: ''
+				}],
+				itemList: [{
+					ingredient: '',
+					quantity: '',
+					measure: ''
+					}]
+				}]
 		}
 	}
-	addRecipe = (e) => {
+	//Not ready
+	// addRecipe = (e) => {
+	// 	e.preventDefault();
+	// 	this.setState({
+	// 		apiRecipeId: e.currentTarget.
+	// 		recipeList: [...this.state.recipeList, e.currentTarget.value]
+			 
+	// 	})
+	// }
+	//Not ready
+	addRecipeIngredients = async (e) => {
 		e.preventDefault();
-		this.setState({
-			recipeList: [...this.state.recipeList, this.props.recipe]
-		})
-	}
-	addRecipeIngredients = (ingredient, e) => {
-		e.preventDefault();
+		const ingredients = await fetch('http://localhost:/list/ingredients');
+		//How do I pass the req.query.apiRecipeId back to the back end
+		const parsedResponse = await ingredients.json();
 
 	}
   handleIngredientChange = (e) => {
@@ -46,6 +79,15 @@ class RecipeContainer extends Component {
 			recipeList: this.state.recipeList.filter((recipe) => recipe._id !== id )
 		})
 	}
+	openAndEdit = (targetIngredient) => {
+		this.setState({
+			showIngredientModal: true,
+			ingredientToEdit: {
+				...targetIngredient
+			}
+		})
+	}
+	//Working on
 	deleteIngredient = async (id) => {
 		this.setState({
 			itemList: this.state.itemList.filter((ingredient) => ingredient._id !== id)
@@ -72,7 +114,7 @@ class RecipeContainer extends Component {
 				console.log(e, "e from addTrip in ListContainer");
 			}		
 	}
-	//<RecipeResults query={this.state.query} />
+	//<RecipeResults query={this.state.query}/>
 	//<RecipeSearch handleQuery={this.handleQuery}/>
 	render() {
 		return (
@@ -84,7 +126,8 @@ class RecipeContainer extends Component {
 					</FormGroup>
 						<small>{moment().format('LLL')}</small>
 					</Form>
-				<TempIngredients />
+				<TempIngredients ingredients={this.state.ingredients} deleteIngredient={this.deleteIngredient} openAndEdit={this.openAndEdit}/>
+				<EditIngredients open={this.state.showIngredientModal} ingredientToEdit={this.state.ingredientToEdit} handleIngredientChange={this.handleIngredientChange}/>
 				<AddIngredient 
 				addIngredient={this.addIngredient}/>
 				<TempRecipes />

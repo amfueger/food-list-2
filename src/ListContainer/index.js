@@ -42,14 +42,14 @@ class RecipeContainer extends Component {
 				}]
 		}
 	}
-	//Not ready
-addRecipe = (e) => {
+
+	addRecipe = (e) => {
 		e.preventDefault();
 		this.setState({
 			recipeList: [...this.state.recipeList, this.props.recipe]
 		})
 	}
-	//Not ready
+
 	addRecipeIngredients = async (e) => {
 		e.preventDefault();
 		const ingredients = await fetch('http://localhost:/list/ingredients' + this.state.apiRecipeId + + '/information');		
@@ -102,9 +102,12 @@ addRecipe = (e) => {
 	addIngredient = async (ingredient, e) => {
 		e.preventDefault();
 		console.log(ingredient, "ingredient from the button");
+		const currentList = this.state.itemList;
 		this.setState({
-			[e.currentTarget.name]: e.currentTarget.value,
-			itemList: [...this.state.itemList, this.singleIngredient]
+			singleIngredient: {
+			[e.currentTarget.name]: e.currentTarget.value
+			},
+			itemList: [...currentList, this.state.singleIngredient]
 		})
 	}
 

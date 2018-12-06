@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Form, FormGroup, Input, Button, Label } from 'reactstrap';
 
 class Register extends Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state = {
 			username: '',
 			email: '',
@@ -54,9 +54,9 @@ class Register extends Component {
 
 render(){
 	return(
-		<div>
+		<div className="container">
 		<Button floated="right" color="green" onClick={() => this.props.updatePageShowing("Login")}>
-		<small>Already a member?</small><br/>
+		<small>Already a user?</small><br/>
 		Login
 		</Button>
 			<h1>Register</h1>

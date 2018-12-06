@@ -3,8 +3,8 @@ import { Col, Form, Button, Label, FormGroup, Input } from 'reactstrap';
 
 
 class Login extends Component{
-constructor(){
-	super();
+constructor(props){
+	super(props);
 
 	this.state={
 		username: '',
@@ -37,6 +37,7 @@ handleSubmit = async (e) => {
 }
 render(){
 	return(
+		<div className="container">
 			<Form onSubmit={this.handleSubmit}>
 			<Col md={5}>
 				<FormGroup>
@@ -66,6 +67,7 @@ render(){
 				color='primary'>Login</Button>
 				</Col>
 			</Form>
+		</div>
 		)
 }
 

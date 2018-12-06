@@ -5,10 +5,8 @@ import { Row, Col, Card, CardImg, CardBody, CardTitle, CardText } from 'reactstr
 class RandomRecipes extends Component {
 	constructor() {
 		super()
-
 		this.state = {
 			recipes: []
-
 		}
 	}
 getRandomRecipes = async () => {

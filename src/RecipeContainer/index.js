@@ -5,26 +5,31 @@ import RecipeResults from './RecipeResults';
 
 
 class RecipeContainer extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props);
+
 		this.state = {
-			query: '',
 			results: []
-		}
+		};
 	}
 
-	handleQuery = (query) => {
-		this.setState({ 
-			query: query
-		})
+	handleQuery = async (query) => {
+		try {
+			const recipes = await fetch(`http://localhost:9000/recipe/search?query=${query}`);
+			const parsedResponse = await recipes.json();
+			this.setState({
+				results: parsedResponse.data.body.results,
+			});
+		} catch(error){
+			console.log(error);
+		}
 	}
 //<RandomRecipes />
 	render() {
 		return(
-			<div>
-				
+			<div className="container">
 				<RecipeSearch handleQuery={this.handleQuery}/>
-				<RecipeResults query={this.state.query} />
+				<RecipeResults results={this.state.results} />
 			</div>
 		)
 	}

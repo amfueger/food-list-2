@@ -33,23 +33,22 @@ class RecipeContainer extends Component {
 					apiRecipeId: null,
 					title: ''
 				}],
-				itemList: [{
+				itemList: [],
+				singleIngredient: {
 					ingredient: '',
 					quantity: '',
 					measure: ''
-					}]
+				}
 				}]
 		}
 	}
 	//Not ready
-	// addRecipe = (e) => {
-	// 	e.preventDefault();
-	// 	this.setState({
-	// 		apiRecipeId: e.currentTarget.
-	// 		recipeList: [...this.state.recipeList, e.currentTarget.value]
-			 
-	// 	})
-	// }
+addRecipe = (e) => {
+		e.preventDefault();
+		this.setState({
+			recipeList: [...this.state.recipeList, this.props.recipe]
+		})
+	}
 	//Not ready
 	addRecipeIngredients = async (e) => {
 		e.preventDefault();
@@ -87,6 +86,14 @@ class RecipeContainer extends Component {
 			}
 		})
 	}
+	addIngredient = async (ingredient, e) => {
+		e.preventDefault();
+		console.log(ingredient, "ingredient from the button");
+		this.setState({
+			[e.currentTarget.name]: e.currentTarget.value,
+			itemList: [...this.state.itemList, this.singleIngredient]
+		})
+	}
 	//Working on
 	deleteIngredient = async (id) => {
 		this.setState({
@@ -95,6 +102,7 @@ class RecipeContainer extends Component {
 	}
 	getTrips = async () => {
 		const trips = await fetch('http://localhost:9000/list/past/trips')
+		console.log(trips);
 	}
 	addTrip = async (trip, e) => {
 			try {
@@ -116,6 +124,8 @@ class RecipeContainer extends Component {
 	}
 	//<RecipeResults query={this.state.query}/>
 	//<RecipeSearch handleQuery={this.handleQuery}/>
+	//<TempIngredients ingredients={this.state.ingredients} deleteIngredient={this.deleteIngredient} openAndEdit={this.openAndEdit}/>
+
 	render() {
 		return (
 			<div>
@@ -126,7 +136,6 @@ class RecipeContainer extends Component {
 					</FormGroup>
 						<small>{moment().format('LLL')}</small>
 					</Form>
-				<TempIngredients ingredients={this.state.ingredients} deleteIngredient={this.deleteIngredient} openAndEdit={this.openAndEdit}/>
 				<EditIngredients open={this.state.showIngredientModal} ingredientToEdit={this.state.ingredientToEdit} handleIngredientChange={this.handleIngredientChange}/>
 				<AddIngredient 
 				addIngredient={this.addIngredient}/>

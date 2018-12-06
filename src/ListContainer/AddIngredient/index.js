@@ -14,6 +14,7 @@ class AddIngredient extends Component {
 	}
 	
 	updateIngredient = (e) => {
+		e.preventDefault();
 		this.setState({
 			[e.currentTarget.name]: e.currentTarget.value
 		})
@@ -21,7 +22,7 @@ class AddIngredient extends Component {
 	render() {
 		return(
 			<Form 
-			onSubmit={this.props.addIngredient}>
+			onSubmit={this.props.addIngredient.bind(null, this.state.ingredient)}>
 				<Label>Add Ingredients Manually</Label>
 			<Row>
 			<Col md={3}>
@@ -69,8 +70,7 @@ class AddIngredient extends Component {
 				<Col md={1}>
 				<Button 
 				color="primary" 
-				type="Submit"
-				onClick={() => this.props.addIngredient.bind(null, this.state.ingredient)}>
+				type="Submit">
 				Add</Button>
 				</Col>
 				</Row>

@@ -2,24 +2,18 @@ import React, { Component } from 'react';
 import { Card, CardColumns, CardImg, CardText, CardTitle, CardBody } from 'reactstrap';
 
 class RecipeResults extends Component {
-	constructor() {
-		super();
-		this.state = {
-			results: [],
-		}
-	}
 	render(){
 		const imgStyle = {
 			height: '180px',
 			width: '316px'
 		}
-		const recipes = this.state.results.map((recipe, i) => {
+		const recipes = this.props.results.map((recipe, i) => {
 			return(
 				<Card key={i}>
-					<CardImg style={imgStyle} top width="100%" src={this.recipe.recipes.image} />
+					<CardImg style={imgStyle} top width="100%" src={`https://spoonacular.com/recipeImages/${recipe.image}`} />					
 					<CardBody>
-						<CardTitle>{this.recipe.recipes.title}</CardTitle>
-						<CardText>{this.recipe.recipes.servings}</CardText>
+						<CardTitle><a href={recipe.url}>{recipe.title}</a></CardTitle>
+						<CardText>{recipe.servings}</CardText>
 					</CardBody>
 				</Card>
 				)

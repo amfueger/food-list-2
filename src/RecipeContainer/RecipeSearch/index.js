@@ -10,7 +10,6 @@ import { Col, Form, Button, Input } from 'reactstrap';
 class RecipeSearch extends Component {
 	constructor() {
 		super();
-
 		this.state = {
 			query: ''
 
@@ -29,8 +28,15 @@ handleSubmit = (e) => {
 		return(
 			<Form onSubmit={this.handleSubmit}>
 			<Col md={3}>
-				<Input type='text' name='query' value={this.state.query} onChange={this.handleInput} placeholder='Look up Recipe'/>
-				<Button color="primary" size='large' type='Submit'>Search</Button>
+				<Input 
+				type='text' 
+				name='query' 
+				value={this.state.query} 
+				onChange={this.handleInput} 
+				placeholder='Look up Recipe'
+				style={{marginTop: 10, marginBottom: 10}}
+				/>
+				<Button color="primary" size='large' type='Submit' style={{marginTop: 10, marginBottom: 10}}>Search</Button>
 				</Col>
 			</Form>
 			)

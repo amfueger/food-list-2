@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavItem, Navbar, Nav } from 'reactstrap';
 import serverURL from '../serverURL.js';
 
+
 class NavLogged extends Component {
 	handleLogout = async () => {
 	    try {
@@ -23,16 +24,24 @@ class NavLogged extends Component {
 		return(
 			<Navbar color="light" light expand="md">
 				<Nav className="ml-auto" navbar>
-					<NavItem onClick={() => this.props.updateComponentShowing("CurrentList")}>
+					<NavItem 
+					className="navigation"
+					onClick={() => this.props.updateComponentShowing("CurrentList")}>
 				    	Home
 					</NavItem>
-					<NavItem onClick={() => this.props.updateComponentShowing("Recipes")}>
+					<NavItem 
+					className="navigation"
+					onClick={() => this.props.updateComponentShowing("Recipes")}>
 				    	Recipes
 					</NavItem>
-					<NavItem onClick={() => this.props.updateComponentShowing("Login")}>
+					<NavItem 
+					className="navigation"
+					onClick={() => this.props.updateComponentShowing("Login")}>
 						Past Lists
 					</NavItem>
-					<NavItem onClick={this.handleLogout}>
+					<NavItem 
+					className="navigation"
+					onClick={this.handleLogout}>
 					Logout
 					</NavItem>
 				</Nav>

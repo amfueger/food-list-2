@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 
 const TempIngredients = (props) => {
-		const ingredients = this.state.ingredients.map((ingredient, i) => {
+		const ingredients = props.ingredients.map((ingredient, i) => {
 			return( 
 				<ListGroupItem key={i}>
 				 {ingredient.quantity} : {ingredient.measurement} - {ingredient.ingredient}
@@ -13,7 +13,7 @@ const TempIngredients = (props) => {
 				<Button
 				type="submit" 
 				color="secondary"
-				onClick={props.deleteMovie.bind(null, i)}>Delete</Button>
+				onClick={props.deleteIngredient.bind(null, i)}>Delete</Button>
 				</ListGroupItem>
 				)
 		})

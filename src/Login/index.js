@@ -38,7 +38,7 @@ handleSubmit = async (e) => {
 render(){
 	return(
 			<Form onSubmit={this.handleSubmit}>
-			<Col md={6}>
+			<Col md={5}>
 				<FormGroup>
 					<Label> Username: </Label>
 					<Input 
@@ -49,7 +49,7 @@ render(){
 					required/>
 				</FormGroup>
 				</Col>
-				<Col md={6}>
+				<Col md={5}>
 				<FormGroup>
 					<Label> Password: </Label>
 					<Input 
@@ -60,9 +60,11 @@ render(){
 					required/>
 				</FormGroup>
 				</Col>
+				<Col md={2}>
 				<Button 
 				type='Submit' 
 				color='primary'>Login</Button>
+				</Col>
 			</Form>
 		)
 }

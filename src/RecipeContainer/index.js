@@ -7,7 +7,6 @@ import RecipeResults from './RecipeResults';
 class RecipeContainer extends Component {
 	constructor() {
 		super()
-
 		this.state = {
 			query: '',
 			results: []
@@ -19,11 +18,11 @@ class RecipeContainer extends Component {
 			query: query
 		})
 	}
-
+//<RandomRecipes />
 	render() {
 		return(
 			<div>
-				<RandomRecipes />
+				
 				<RecipeSearch handleQuery={this.handleQuery}/>
 				<RecipeResults query={this.state.query} />
 			</div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavItem, Navbar, Nav } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class Navb extends Component {
 

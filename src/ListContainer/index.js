@@ -26,6 +26,7 @@ class RecipeContainer extends Component {
 			}, 
 			showRecipeModal: false,
 			showIngredientModal: false,
+			itemList: [],
 			currentTrip: [{
 				tripName: '',
 				date: Date,
@@ -42,15 +43,15 @@ class RecipeContainer extends Component {
 				}]
 		}
 	}
-
 	addRecipe = (e) => {
 		e.preventDefault();
+		console.log();
+		// const currentRecipe = e.currentTarget.
 		this.setState({
 			recipeList: [...this.state.recipeList, this.props.recipe]
 		})
 	}
-
-	addRecipeIngredients = async (e) => {
+		addRecipeIngredients = async (e) => {
 		e.preventDefault();
 		const ingredients = await fetch('http://localhost:/list/ingredients' + this.state.apiRecipeId + + '/information');		
 		const parsedResponse = await ingredients.json();
@@ -70,13 +71,22 @@ class RecipeContainer extends Component {
 			itemList: currentList
 		})
 	}
-  handleIngredientChange = (e) => {
-    this.setState({
-      ingredientToEdit: {
-        ...this.state.ingredientToEdit,
-        [e.currentTarget.name]: e.currentTarget.value
-      }
-    });
+  handleIngredientChange = (e,  newIngredient) => {
+		e.preventDefault();
+		const { itemList, ingredientToEdit } = this.state;
+		let index = -1;
+		itemList.find((item, i) => {
+			if(JSON.stringify(item) === JSON.stringify(ingredientToEdit)) {
+				index = i;
+				return i;
+			}
+		});
+		itemList[index] = newIngredient;
+
+		this.setState({
+			showIngredientModal: false,
+			itemList,
+		});
 	}
   handleRecipeChange = (e) => {
     this.setState({
@@ -91,7 +101,7 @@ class RecipeContainer extends Component {
 			recipeList: this.state.recipeList.filter((recipe) => recipe._id !== id )
 		})
 	}
-	openAndEdit = (targetIngredient) => {
+		openAndEdit = (targetIngredient) => {
 		this.setState({
 			showIngredientModal: true,
 			ingredientToEdit: {
@@ -99,24 +109,26 @@ class RecipeContainer extends Component {
 			}
 		})
 	}
-	addIngredient = async (ingredient, e) => {
-		e.preventDefault();
+	addIngredient = (ingredient) => {
 		console.log(ingredient, "ingredient from the button");
 		const currentList = this.state.itemList;
+		currentList.push(ingredient);
 		this.setState({
-			singleIngredient: {
-			[e.currentTarget.name]: e.currentTarget.value
-			},
-			itemList: [...currentList, this.state.singleIngredient]
-		})
+			itemList: currentList
+		});
 	}
+	// deleteIngredient = async (id) => {
+	// 	this.setState({
+	// 		itemList: this.state.itemList.filter((ingredient) => ingredient._id !== id)
+	// 	})
+	// }
 
-
-	//Working on
-	deleteIngredient = async (id) => {
+		deleteIngredient = (id) => {
+		const currentList = this.state.itemList;
+		currentList.splice(id, 1);
 		this.setState({
-			itemList: this.state.itemList.filter((ingredient) => ingredient._id !== id)
-		})
+			itemList: currentList,
+		});
 	}
 	getTrips = async () => {
 		const trips = await fetch('http://localhost:9000/list/past/trips')
@@ -140,10 +152,8 @@ class RecipeContainer extends Component {
 				console.log(e, "e from addTrip in ListContainer");
 			}		
 	}
-	//<RecipeResults query={this.state.query}/>
+	//<RecipeResults addRecipe={this.addRecipe} query={this.state.query} />
 	//<RecipeSearch handleQuery={this.handleQuery}/>
-	//<TempIngredients ingredients={this.state.ingredients} deleteIngredient={this.deleteIngredient} openAndEdit={this.openAndEdit}/>
-
 	render() {
 		return (
 			<div>
@@ -154,7 +164,15 @@ class RecipeContainer extends Component {
 					</FormGroup>
 						<small>{moment().format('LLL')}</small>
 					</Form>
-				<EditIngredients open={this.state.showIngredientModal} ingredientToEdit={this.state.ingredientToEdit} handleIngredientChange={this.handleIngredientChange}/>
+					{this.state.showIngredientModal &&
+					<EditIngredients 
+					open={this.state.showIngredientModal} 
+					ingredientToEdit={this.state.ingredientToEdit} 
+					handleIngredientChange={this.handleIngredientChange} />}
+				<TempIngredients 
+				ingredients={this.state.itemList} 
+				deleteIngredient={this.deleteIngredient} 
+				penAndEdit={this.openAndEdit}/>
 				<AddIngredient 
 				addIngredient={this.addIngredient}/>
 				<TempRecipes />

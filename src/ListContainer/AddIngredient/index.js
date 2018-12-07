@@ -4,12 +4,10 @@ import { Row, Col, Button, Form, FormGroup, Label, Input, FormTest } from 'react
 class AddIngredient extends Component {
 	constructor(){
 		super();
-		this.state = {
-			ingredient: [{ 
+		this.state = { 
 				amount: '',
 				measurement: '',
-				description: '',
-			}]
+				description: ''
 		}
 	}
 	
@@ -19,20 +17,24 @@ class AddIngredient extends Component {
 			[e.currentTarget.name]: e.currentTarget.value
 		})
 	}
+	addIngredient = (e) => {
+		e.preventDefault();
+		this.props.addIngredient(this.state);
+	}
 	render() {
 		return(
 			<Form 
-			onSubmit={this.props.addIngredient.bind(null, this.state.ingredient)}>
+			onSubmit={this.addIngredient}>
 				<Label>Add Ingredients Manually</Label>
 			<Row>
 			<Col md={3}>
 				<FormGroup>
 				<Label>Amount</Label>
 					<Input 
-					type="amount" 
-					name="amount" 
+					type="quantity" 
+					name="quantity" 
 					placeholder="1oz, 1 cup, etc."
-					value={this.state.ingredient.amount}
+					value={this.state.quantity}
 					onChange={this.updateIngredient}/>
 				</FormGroup>
 				</Col>
@@ -41,7 +43,7 @@ class AddIngredient extends Component {
 					<Label>Measurement</Label>
 					<Input type="select" 
 					name="measurement" 
-					value={this.state.ingredient.measurement}
+					value={this.state.measurement}
 					onChange={this.updateIngredient}>
 						<option>N/A</option>
 						<option>No measurement</option>
@@ -63,7 +65,7 @@ class AddIngredient extends Component {
 					<Input 
 					type="ingredient" 
 					name="ingredient"
-					value={this.state.ingredient.ingredient}
+					value={this.state.ingredient}
 					onChange={this.updateIngredient}/>
 				</FormGroup>
 				</Col>

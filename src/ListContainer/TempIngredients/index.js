@@ -9,11 +9,11 @@ const TempIngredients = (props) => {
 				<Button 
 				type="submit" 
 				color="secondary"
-				onClick={props.openAndEdit.bind(null, ingredient)}>Edit</Button>
+				onClick={() => { props.openAndEdit(ingredient); }}>Edit</Button>
 				<Button
 				type="submit" 
 				color="secondary"
-				onClick={props.deleteIngredient.bind(null, i)}>Delete</Button>
+				onClick={() => { props.deleteIngredient(i); }}>Delete</Button>
 				</ListGroupItem>
 				)
 		})

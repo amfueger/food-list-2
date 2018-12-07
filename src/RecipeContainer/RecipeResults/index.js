@@ -10,10 +10,10 @@ class RecipeResults extends Component {
 		const recipes = this.props.results.map((recipe, i) => {
 			return(
 				<Card key={i}>
-					<CardImg style={imgStyle} top width="100%" src={`https://spoonacular.com/recipeImages/${recipe.image}`} />					
+					<CardImg style={{imgStyle}} top src={`https://spoonacular.com/recipeImages/${recipe.image}`} />					
 					<CardBody>
 						<CardTitle><a href={recipe.url}>{recipe.title}</a></CardTitle>
-						<CardText>{recipe.servings}</CardText>
+						<CardText>Servings: {recipe.servings}</CardText>
 					</CardBody>
 				</Card>
 				)

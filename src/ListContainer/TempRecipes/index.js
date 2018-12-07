@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label } from 'reactstrap';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
 class TempRecipes extends Component{
 	constructor(){
 		super();
 		this.state = {
-
+			recipes: []
 		}
 	}
 
 
 
 	render() {
+		const recipe = this.props.recipe
+
+
 		return(
 			<div>
-				<Form>
-				<Label>Temporary Recipes</Label>
-				</Form>
+				<ListGroup>
+					{recipe}
+				</ListGroup>
 			</div>
 			)
 	}

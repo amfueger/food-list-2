@@ -28,6 +28,8 @@ class RecipeContainer extends Component {
 	render() {
 		return(
 			<div className="container">
+				<h2>Food List</h2>
+				<RandomRecipes />
 				<RecipeSearch handleQuery={this.handleQuery}/>
 				<RecipeResults results={this.state.results} />
 			</div>

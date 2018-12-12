@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 
-class TempRecipes extends Component{
-	constructor(){
-		super();
-		this.state = {
-			recipes: []
-		}
-	}
-
-
-
-	render() {
-		const recipe = this.props.recipe
-
+const TempRecipes = (props) => {
+	const recipes = props.recipes.map((recipe, i) => {
+		return(
+			<ListGroupItem key={i}>
+			<Button 
+				type="submit" 
+				color="secondary"
+				onClick={() => { props.openAndEdit(recipe); }}>Edit</Button>
+				<Button
+				type="submit" 
+				color="secondary"
+				onClick={() => { props.deleteRecipe(i); }}>Delete</Button>
+				</ListGroupItem>	
+			)
+	})
 
 		return(
 			<div>
 				<ListGroup>
-					{recipe}
+					{recipes}
 				</ListGroup>
 			</div>
 			)
 	}
 
 
-}
+
 
 export default TempRecipes; 

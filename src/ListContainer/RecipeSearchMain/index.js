@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Button, Input, Col } from 'reactstrap';
+import { Col, Form, Button, Input } from 'reactstrap';
+// import RecipeSearch from './RecipeSearch';
+//API here
 
 //Search Bar at the top for recipes. 
 //Underneath 6 random recipes

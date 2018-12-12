@@ -172,7 +172,7 @@ class RecipeContainer extends Component {
 				<TempIngredients 
 				ingredients={this.state.itemList} 
 				deleteIngredient={this.deleteIngredient} 
-				penAndEdit={this.openAndEdit}/>
+				openAndEdit={this.openAndEdit}/>
 				<AddIngredient 
 				addIngredient={this.addIngredient}/>
 				<TempRecipes />

@@ -5,20 +5,38 @@ class AddRecipe extends Component {
 	constructor(){
 		super();
 		this.state = {
-			ingredients: []
+			recipe: '',
+			ingredients: [{
+				ingredient: '',
+				quantity: '',
+				measurement: ''
+			}],
 		}
 	}
-	getRecipeIngredients = async (id, e) => {
-		const recipeIngredients = await fetch('http://localhost:9000/list/add/' + id);
+	//Get recipe by id
+
+	getRecipe = async (id, e) => {
+		const recipeIngredients = await fetch('http://localhost:9000/recipe/search/' + id);
 		const parsedResponse = await recipeIngredients.json();
 		return parsedResponse;
 	}
 	componentDidMount() {
-		this.getRecipeIngredients().then((ingredients) => {
+		this.getRecipe().then((recipe) => {
 			this.setState({
-				ingredients: ingredients.data
+				recipe: recipe.data
 			}).catch((err) => {
 				console.log(err, "componentDidMount error Add Recipe");
+			})
+		})
+	}
+	//Have the recipe, map the ingredients. 
+	getIngredients = async () => {
+		const ingredients = await this.props.recipe.extendedIngredients.map((ingredient, i) => {
+			const quantity = await this.props.recipe.extendedIngredients[i].name
+			const amount = await this.props.recipe.extendedIngredients[i].measures.us.amount
+			const measure = await this.props.recipe.extendedIngredients[i].measures.us.unitShort
+			this.setState({
+				ingredients: [...this.state.ingredients, ingredients]
 			})
 		})
 	}
@@ -29,7 +47,7 @@ class AddRecipe extends Component {
 			<Button 
 			color="blue"
 			type="Submit"
-			onClick={this.props.addRecipe}
+			onClick={this.props.addRecipeIngredients}
 			>Select Recipe</Button>
 			)
 	}

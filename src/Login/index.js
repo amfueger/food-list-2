@@ -30,10 +30,11 @@ handleSubmit = async (e) => {
 	});
 	const parsedResponse = await loginResponse.json();
 	console.log(parsedResponse, "parsedResponse in login");
-	if(parsedResponse.data === 'Login successful!'){
+	if (parsedResponse.data === 'Login successful!') {
 		console.log('success login');
-	this.props.updateComponentShowing("ListContainer")
-	}
+		this.props.updateComponentShowing("ListContainer");
+		this.props.handleRegisterLogin(parsedResponse.session.username, parsedResponse.session.loggedIn);
+	};
 }
 render(){
 	return(

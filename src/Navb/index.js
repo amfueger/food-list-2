@@ -10,11 +10,11 @@ class Navb extends Component {
 			<Navbar color="light" light expand="md">
 				<Nav className="ml-auto" navbar>
 					<NavItem className="navigation"
-					onClick={() => this.props.updateComponentShowing("List")}>
+					onClick={() => this.props.updateComponentShowing("ListContainer")}>
 				    	Home 
 					</NavItem>
 					<NavItem className="navigation"
-					onClick={() => this.props.updateComponentShowing("Recipes")}>
+					onClick={() => this.props.updateComponentShowing("RecipeContainer")}>
 				    	Recipes 
 					</NavItem>
 					<NavItem className="navigation"

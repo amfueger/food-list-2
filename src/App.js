@@ -17,7 +17,7 @@ import ListContainer from './ListContainer';
 //Server access
 import serverURL from './serverURL.js';
 
-import apiUrl from './apiUrl'
+import apiUrl from './apiUrl';
 console.log(apiUrl);
 class App extends Component {
   constructor() {
@@ -28,62 +28,83 @@ class App extends Component {
       username: '',
       email: '',
       recipes: []
-    }
-  this.updateComponentShowing = this.updateComponentShowing.bind(this)
+    };
+    this.updateComponentShowing = this.updateComponentShowing.bind(this);
+    this.handleRegisterLogin = this.handleRegisterLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleRegisterLogin = (username, email, isLogged) => {
+  handleRegisterLogin = (username, isLogged) => {
     this.setState({
       username: username,
-      email: email,
       logged: isLogged
     });
   }
 
+  handleLogout = async () => {
+    try {
+      const logoutRequest = await fetch(serverURL + 'auth/logout', {
+        credentials: 'include'
+      });
+
+      const parsedResponse = await logoutRequest.json();
+
+      console.log(`parsedResponse from Logout: `, parsedResponse);
+      this.setState({
+        componentShowing: 'Login',
+        username: '',
+        logged: false
+      });
+
+    } catch(err) {
+        console.log('Error: ', err);
+    }
+  }
+
   updateComponentShowing = (componentShowing) => {
-    this.setState({componentShowing: componentShowing})
-}
+    this.setState({componentShowing: componentShowing});
+  }
 
   render() {
     return (
       <div className="App">
-      {this.state.logged ?
-        <NavLogged updateComponentShowing={this.updateComponentShowing}/>
-        : <Navb updateComponentShowing={this.updateComponentShowing}/>}
-     {this.state.componentShowing === "RecipeContainer" ? 
-      <div>
-    <RecipeContainer 
-    updateComponentShowing={this.updateComponentShowing} 
-    appState={this.state}/>
-      </div> 
-     : null}
-      {this.state.componentShowing === "Register" ? 
-      <div>
-        <Register 
-        updateComponentShowing={this.updateComponentShowing}
-        handleRegisterLogin={this.handleRegisterLogin}
-        appState={this.state}
-        />
+        {this.state.logged ?
+          <NavLogged updateComponentShowing={this.updateComponentShowing} handleLogout={this.handleLogout}/>
+          : <Navb updateComponentShowing={this.updateComponentShowing}/>}
+        {/* Show currently displayed component for easier debugging */}
+        <h1 style={{textAlign: 'left'}}>{this.state.componentShowing}</h1>
+        <hr/>
+        {this.state.componentShowing === "RecipeContainer" &&
+          <div>
+            <RecipeContainer
+              updateComponentShowing={this.updateComponentShowing}
+              appState={this.state}/>
+          </div>
+        }
+        {this.state.componentShowing === "Register" &&
+          <div>
+            <Register
+              updateComponentShowing={this.updateComponentShowing}
+              handleRegisterLogin={this.handleRegisterLogin}
+              appState={this.state}/>
+          </div>
+        }
+        {this.state.componentShowing === "Login" &&
+          <div>
+            <Login
+              updateComponentShowing={this.updateComponentShowing}
+              handleRegisterLogin={this.handleRegisterLogin}
+              appState={this.state}/>
+          </div>
+        }
+        {this.state.componentShowing === "ListContainer" &&
+          <div>
+          <ListContainer
+            updateComponentShowing={this.updateComponentShowing}
+            appState={this.state}/>
+          </div>
+        }
       </div>
-      : null}
-      {this.state.componentShowing === "Login" ? 
-    <div>
-      <Login 
-      updateComponentShowing={this.updateComponentShowing} 
-      handleRegisterLogin={this.handleRegisterLogin} 
-      appState={this.state}/>
-    </div> 
-    : null} 
-
-      {this.state.componentShowing === "ListContainer" ? 
-    <div>
-      <ListContainer 
-      updateComponentShowing={this.updateComponentShowing} 
-      appState={this.state}/>
-    </div> 
-    : null} 
-      
-  </div>
     );
   }
 }

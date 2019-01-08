@@ -29,7 +29,6 @@ class RecipeContainer extends Component {
 		return(
 			<div className="container">
 				<h2>Food List</h2>
-				
 				<RecipeSearch handleQuery={this.handleQuery}/>
 				<RecipeResults results={this.state.results} />
 			</div>

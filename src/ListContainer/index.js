@@ -23,7 +23,7 @@ class RecipeContainer extends Component {
 				ingredient: '',
 				quantity: '',
 				measure: ''
-			}, 
+			},
 			showRecipeModal: false,
 			showIngredientModal: false,
 			itemList: [],
@@ -88,6 +88,7 @@ class RecipeContainer extends Component {
 			itemList,
 		});
 	}
+
   handleRecipeChange = (e) => {
     this.setState({
       recipeToEdit: {
@@ -95,13 +96,15 @@ class RecipeContainer extends Component {
         [e.currentTarget.name]: e.currentTarget.value
       }
     });
-  }
+	}
+
 	deleteRecipe = async (id) => {
 		this.setState({
 			recipeList: this.state.recipeList.filter((recipe) => recipe._id !== id )
 		})
 	}
-		openAndEdit = (targetIngredient) => {
+
+	openAndEdit = (targetIngredient) => {
 		this.setState({
 			showIngredientModal: true,
 			ingredientToEdit: {
@@ -109,6 +112,7 @@ class RecipeContainer extends Component {
 			}
 		})
 	}
+
 	addIngredient = (ingredient) => {
 		console.log(ingredient, "ingredient from the button");
 		const currentList = this.state.itemList;
@@ -117,23 +121,26 @@ class RecipeContainer extends Component {
 			itemList: currentList
 		});
 	}
+
 	// deleteIngredient = async (id) => {
 	// 	this.setState({
 	// 		itemList: this.state.itemList.filter((ingredient) => ingredient._id !== id)
 	// 	})
 	// }
 
-		deleteIngredient = (id) => {
+	deleteIngredient = (id) => {
 		const currentList = this.state.itemList;
 		currentList.splice(id, 1);
 		this.setState({
 			itemList: currentList,
 		});
 	}
+
 	getTrips = async () => {
 		const trips = await fetch('http://localhost:9000/list/past/trips')
 		console.log(trips);
 	}
+
 	addTrip = async (trip, e) => {
 			try {
 				const newTrip = await fetch('http://localhost:9000/current/complete', {
@@ -162,22 +169,23 @@ class RecipeContainer extends Component {
 						<Label>Name of Trip:</Label>
 						<Input name="title" type="title" placeholder={moment().format('LLL')}/>
 					</FormGroup>
-						<small>{moment().format('LLL')}</small>
-					</Form>
-					{this.state.showIngredientModal &&
-					<EditIngredients 
-					open={this.state.showIngredientModal} 
-					ingredientToEdit={this.state.ingredientToEdit} 
-					handleIngredientChange={this.handleIngredientChange} />}
-				<TempIngredients 
-				ingredients={this.state.itemList} 
-				deleteIngredient={this.deleteIngredient} 
-				openAndEdit={this.openAndEdit}/>
-				<AddIngredient 
-				addIngredient={this.addIngredient}/>
+					<small>{moment().format('LLL')}</small>
+				</Form>
+				{this.state.showIngredientModal &&
+					<EditIngredients
+						open={this.state.showIngredientModal}
+						ingredientToEdit={this.state.ingredientToEdit}
+						handleIngredientChange={this.handleIngredientChange}/>
+				}
+				<RecipeSearch handleQuery={this.handleQuery}/>
+				<RecipeResults results={this.state.results} addRecipeIngredients={this.addRecipeIngredients}/>
+				<TempIngredients
+					ingredients={this.state.itemList}
+					deleteIngredient={this.deleteIngredient}
+					openAndEdit={this.openAndEdit}/>
+				<AddIngredient
+					addIngredient={this.addIngredient}/>
 				<TempRecipes />
-				
-				
 			</div>
 			)
 	}

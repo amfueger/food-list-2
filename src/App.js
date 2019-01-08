@@ -17,7 +17,7 @@ import ListContainer from './ListContainer';
 //Server access
 import serverURL from './serverURL.js';
 
-import apiUrl from './apiUrl'
+import apiUrl from './apiUrl';
 console.log(apiUrl);
 class App extends Component {
   constructor() {

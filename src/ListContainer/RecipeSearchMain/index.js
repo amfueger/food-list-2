@@ -27,7 +27,7 @@ handleSubmit = (e) => {
 	render() {
 		return(
 			<Form onSubmit={this.handleSubmit}>
-			<Col md={3}>
+				<Col md={3}>
 				<Input 
 				type='text' 
 				name='query' 

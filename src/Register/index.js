@@ -40,13 +40,12 @@ class Register extends Component {
 		}
 	});
 	const parsedRegister = await register.json();
-
-	if(parsedRegister.data === 'Register Succesful') {
+	if(parsedRegister.data === 'Registration successful') {
 		this.props.handleRegisterLogin(
 			parsedRegister.session.username,
-			parsedRegister.session.logged
-			);
-		this.props.updatePageShowing('ListContainer');
+			parsedRegister.session.loggedIn
+		);
+		this.props.updateComponentShowing('ListContainer');
 	} else {
 		this.hideMessage();
 	}
